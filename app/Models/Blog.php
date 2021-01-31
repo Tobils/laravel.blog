@@ -10,6 +10,6 @@ class Blog extends Model
     use softDeletes;
 
     protected $fillable = [
-        'title', 'description'
+        'title', 'description','image'
     ];
 }

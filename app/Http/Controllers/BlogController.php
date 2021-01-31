@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BlogRequest;
+
+
 use App\Models\Blog;
 
 class BlogController extends Controller
@@ -36,9 +39,14 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        //
+        $blog = $request->all();
+        $blog['image'] = 'storage/'.$request->file('image')->store(
+            'assets/blog', 'public'
+        );
+        Blog::create($blog);
+        return redirect()->route('blog.index');
     }
 
     /**
