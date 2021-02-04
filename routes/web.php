@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'blog'], function () {
     Route::get('/','BlogController@index')->name('blog.index');
-    Route::get('/create','BlogController@create')->name('blog.create');
     Route::post('/','BlogController@store')->name('blog.store');
+    Route::get('/create','BlogController@create')->name('blog.create');
+    Route::get('/edit/{id}','BlogController@edit')->name('blog.edit');
+    Route::put('/update/{id}','BlogController@update')->name('blog.update');
+
 });

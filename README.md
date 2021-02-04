@@ -69,6 +69,8 @@ public function store(BlogRequest $request)
 php artisan storage:link
 ```
 
+- filter get data descending `$blog = Blog::orderBy('created_at', 'desc')->get();`
+
 ## Result
 1. create form
 ![create blog](./ss/blog-create.png)

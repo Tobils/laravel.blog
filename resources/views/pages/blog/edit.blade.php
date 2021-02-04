@@ -6,21 +6,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create New Blog') }}</div>
+                <div class="card-header">{{ __('Update Blog') }} {{ $blog->title }}</div>
 
                 <div class="card-body">
 
-                    <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('blog.update', $blog->id) }}" enctype="multipart/form-data">
+                        @method('PUT')
                         @csrf
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Judul Article">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="{{ $blog->title }}" value="{{ $blog->title }}">
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <!-- <textarea id="editor" type="text" class="form-control" name="description" placeholder="Type article here"></textarea> -->
-                            <!-- <textarea id="konten" class="form-control" name="description" rows="10" cols="50"></textarea> -->
-                            <textarea type="text" class="form-control" id="editor" name="description" placeholder="Type article here"></textarea>
+                            <textarea type="text" class="form-control" id="editor" name="description" placeholder="{{ $blog->description }}">{{ $blog->description }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="image">Add Image</label>

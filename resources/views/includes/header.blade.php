@@ -17,4 +17,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('js/ckeditor.js') }}" defer></script> 
+
 </head>

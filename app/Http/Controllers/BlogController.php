@@ -11,13 +11,22 @@ use App\Models\Blog;
 class BlogController extends Controller
 {
     /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+    public function __construct()
+    {
+       $this->middleware('auth');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $blog = Blog::all();
+        $blog = Blog::orderBy('created_at', 'desc')->get();
         return view('pages.blog.index')->with([
             'blogs' => $blog
         ]);
@@ -68,7 +77,11 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        return view('pages.blog.edit')->with([
+            'blog'=>$blog
+        ]);
+
     }
 
     /**
@@ -78,9 +91,16 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['image'] = 'storage/'.$request->file('image')->store(
+            'assets/blog', 'public'
+        );
+
+        $blog = Blog::findOrFail($id);
+        $blog->update($data);
+        return redirect()->route('blog.index');
     }
 
     /**

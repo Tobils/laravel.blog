@@ -37,7 +37,6 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         @forelse ($blogs as $blog)
-
             <div class="col">
                 <div class="card shadow-sm">
                     <img src="{{ $blog->image }}" class="bd-placeholder-img card-img-top" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
@@ -46,8 +45,12 @@
                         <p class="card-text">{{ $blog->description }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">EDIT</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger">DELETE</button>
+                            <a 
+                              href="{{ route('blog.edit', $blog->id) }}"
+                              class="btn btn-sm btn-outline-success">
+                              EDIT
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="" data-id="{{ $blog->id }}">DELETE</button>
                             </div>
                             <small class="text-muted">{{ $blog->created_at }}</small>
                         </div>
